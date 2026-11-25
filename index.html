@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ReelCut: Long videos in, short clips out</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="wrap">
+  <header><a class="logo" href="#top"><i></i>ReelCut</a><nav><a href="#how">How it works</a><a class="btn sm" href="#editor">Open editor</a></nav></header>
+
+  <section class="hero" id="top">
+    <div><h1>Long videos in. Short clips out.</h1><p class="lede">Cut a recording into vertical, square, or landscape clips. Everything runs in your browser.</p><div class="row"><button class="btn red" id="heroUpload">Upload a video</button><a class="btn ghost" href="#how">See how it works</a></div></div>
+    <div class="reel" aria-hidden="true"><div class="ruler"></div><div class="track"><div class="seg" style="left:6%;width:19%"><b>0:42–1:05</b></div><div class="seg" style="left:38%;width:14%"><b>3:10–3:34</b></div><div class="seg" style="left:66%;width:24%"><b>7:58–8:40</b></div></div><p>Source 14:20 · 3 clips marked</p></div>
+  </section>
+
+  <section class="steps" id="how"><div><h3>Upload</h3><p>Drop in a recording your browser can play. It stays on your device.</p></div><div><h3>Review</h3><p>Choose segments and give each clip a title caption.</p></div><div><h3>Export</h3><p>Choose vertical, square, or landscape and download a clip.</p></div></section>
+
+  <section class="editor" id="editor">
+    <div class="head"><h2>Editor</h2><div class="row"><span class="pin" id="fileName">No video loaded</span><button class="btn ghost sm" id="changeBtn" hidden>Change video</button></div></div>
+    <input type="file" id="file" accept="video/*" hidden>
+    <div class="urlrow"><input id="urlIn" type="url" placeholder="Paste a direct .mp4 or .webm link" aria-label="Video link"><button class="btn sm" id="urlGo">Load link</button></div>
+    <p class="msg" id="urlMsg" aria-live="polite"></p>
+    <div class="layout">
+      <div><div class="drop" id="drop" role="button" tabindex="0"><strong>Drop a video here</strong><p>MP4 or WebM</p><span class="btn ghost sm">Choose file</span></div>
+      <div id="player" hidden><div class="stage"><video id="video" controls playsinline preload="metadata"></video><iframe id="yt" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen hidden></iframe><div class="cap" id="cap" hidden></div></div>
+      <div class="bar"><span class="tc" id="tc">0:00.0 / 0:00</span><span id="times" class="row" hidden><input id="tStart" class="tin" placeholder="0:00"><span class="pin">to</span><input id="tEnd" class="tin" placeholder="0:30"></span><label class="check"><input type="checkbox" id="capToggle" checked> Show title</label><label class="check"><input type="checkbox" id="faceToggle"> Keep faces centered</label><button class="btn ghost sm" id="setIn">Set in</button><button class="btn ghost sm" id="setOut">Set out</button><button class="btn sm" id="addClip">Add clip</button></div><p class="msg" id="msg" aria-live="polite"></p></div></div>
+      <aside class="panel"><div class="panel-head"><h3>Clips <span class="pin" id="count"></span></h3><button class="btn ghost sm" id="suggest" disabled>Suggest segments</button></div><p class="pin">Segments are evenly spaced, up to 45 seconds each.</p><div id="list"></div></aside>
+    </div>
+  </section>
+
+  <section class="faces" id="faces"><div class="head"><h2>Face tracking</h2><span class="pin">Processed on your device</span></div><p class="lede">Start the camera to see faces tracked live.</p><div class="camstage"><video id="camVideo" playsinline muted></video><canvas id="camOverlay"></canvas></div><div class="row"><button class="btn" id="camBtn">Start camera</button><span class="pin" id="camStatus">Click the button to start.</span></div></section>
+
+  <section class="faces" id="live"><div class="head"><h2>Live captions</h2><span class="pin">Uses your microphone</span></div><p class="lede">Speak and your words appear as captions. Chrome and Edge may send audio to a cloud speech service.</p><div class="row"><button class="btn" id="liveBtn">Start captions</button><select id="liveLang"><option value="en-US">English (US)</option><option value="hi-IN">Hindi</option><option value="es-ES">Spanish</option><option value="fr-FR">French</option></select><span class="pin" id="liveStatus">Click the button, then allow microphone access.</span></div><div class="livebox"><span id="liveFinal"></span> <span id="liveInterim"></span></div></section>
+</main>
+<footer>ReelCut never uploads your video. Keep this tab open while a clip renders.</footer>
+<script src="app.js"></script>
+<script type="module" src="face-tracking.js"></script>
+</body>
+</html>
